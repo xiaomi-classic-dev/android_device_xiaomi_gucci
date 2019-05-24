@@ -1,0 +1,9 @@
+on init
+    chown root system /sys/bus/i2c/drivers/atmel_mxt_ts/5-004a/keys_off
+    chmod 0664 /sys/bus/i2c/drivers/atmel_mxt_ts/5-004a/keys_off
+    restorecon /sys/bus/i2c/drivers/atmel_mxt_ts/5-004a/keys_off
+
+service vendor.touch-hal-1-0-gucci /vendor/bin/hw/vendor.mokee.touch@1.0-service.gucci
+    class hal
+    user system
+    group system

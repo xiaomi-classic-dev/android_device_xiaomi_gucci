@@ -121,6 +121,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/thermal-engine.conf:system/vendor/etc/thermal-engine.conf
 
+# Touch
+PRODUCT_PACKAGES += \
+    vendor.mokee.touch@1.0-service.gucci
+
 # USB ID
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.usb.vid=2717 \

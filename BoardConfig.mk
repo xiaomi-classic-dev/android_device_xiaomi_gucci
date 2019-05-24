@@ -54,6 +54,9 @@ USE_REDUCED_CJK_FONT_WEIGHTS := true
 TARGET_NO_RPC := true
 USE_DEVICE_SPECIFIC_GPS := true
 
+# HIDL
+DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/manifest.xml
+
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_gucci
 TARGET_RECOVERY_DEVICE_MODULES := libinit_gucci
@@ -71,9 +74,6 @@ BOARD_RAMDISK_OFFSET     := 0x01000000
 
 # Keymaster
 TARGET_PROVIDES_KEYMASTER := true
-
-# LineaMKge Hardware
-JAVA_SOURCE_OVERLAYS := org.mokee.hardware|$(DEVICE_PATH)/mkhw|**/*.java
 
 # Power
 TARGET_HAS_NO_POWER_STATS := true
