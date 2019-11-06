@@ -57,6 +57,24 @@ int is2GB()
     return sys.totalram > 1024ull * 1024 * 1024;
 }
 
+void property_override(char const prop[], char const value[])
+{
+    prop_info *pi;
+
+    pi = (prop_info*) __system_property_find(prop);
+    if (pi)
+        __system_property_update(pi, value, strlen(value));
+    else
+        __system_property_add(prop, strlen(prop), value, strlen(value));
+}
+
+void property_override_dual(char const system_prop[],
+        char const vendor_prop[], char const value[])
+{
+    property_override(system_prop, value);
+    property_override(vendor_prop, value);
+}
+
 void init_target_properties()
 {
     property_set("dalvik.vm.heapstartsize", "8m");
@@ -65,6 +83,10 @@ void init_target_properties()
     property_set("dalvik.vm.heaptargetutilization", "0.75");
     property_set("dalvik.vm.heapminfree", "512k");
     property_set("dalvik.vm.heapmaxfree", "8m");
+
+    property_override_dual("ro.product.device", "ro.vendor.product.device", "gucci");
+    property_override_dual("ro.product.name", "ro.vendor.product.name", "gucci");
+    property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "Xiaomi/gucci/gucci:4.4.4/KTU84P/7.10.12:user/release-keys");
 
 }
 

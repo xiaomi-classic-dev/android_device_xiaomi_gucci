@@ -31,7 +31,5 @@ PRODUCT_DEVICE := gucci
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 # Build fingerprint
-BUILD_FINGERPRINT="Xiaomi/gucci/gucci:4.4.4/KTU84P/7.10.12:user/release-keys"
-
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRIVATE_BUILD_DESC="gucci-user 4.4.4 KTU84P 7.10.12 release-keys"
