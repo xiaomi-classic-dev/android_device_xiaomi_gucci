@@ -42,7 +42,16 @@
 #include "vendor_init.h"
 #include "property_service.h"
 
-using android::init::property_set;
+void property_override(char const prop[], char const value[])
+{
+    prop_info *pi;
+
+    pi = (prop_info*) __system_property_find(prop);
+    if (pi)
+        __system_property_update(pi, value, strlen(value));
+    else
+        __system_property_add(prop, strlen(prop), value, strlen(value));
+}
 
 int is2GB()
 {
@@ -53,17 +62,17 @@ int is2GB()
 
 void init_target_properties()
 {
-    property_set("dalvik.vm.heapstartsize", "8m");
-    property_set("dalvik.vm.heapgrowthlimit", is2GB() ? "192m" : "96m");
-    property_set("dalvik.vm.heapsize", is2GB() ? "512m" : "256m");
-    property_set("dalvik.vm.heaptargetutilization", "0.75");
-    property_set("dalvik.vm.heapminfree", "512k");
-    property_set("dalvik.vm.heapmaxfree", "8m");
+    property_override("dalvik.vm.heapstartsize", "8m");
+    property_override("dalvik.vm.heapgrowthlimit", is2GB() ? "192m" : "96m");
+    property_override("dalvik.vm.heapsize", is2GB() ? "512m" : "256m");
+    property_override("dalvik.vm.heaptargetutilization", "0.75");
+    property_override("dalvik.vm.heapminfree", "512k");
+    property_override("dalvik.vm.heapmaxfree", "8m");
 }
 
 void vendor_load_properties()
 {
     // Init a dummy BT MAC address, will be overwritten later
-    property_set("ro.boot.btmacaddr", "00:00:00:00:00:00");
+    property_override("ro.boot.btmacaddr", "00:00:00:00:00:00");
     init_target_properties();
 }
